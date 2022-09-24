@@ -38,7 +38,26 @@ const createUserValidators = [
 	checkValidations
 ];
 
+const createGameValidators = [
+	body('title')
+		.isString()
+		.withMessage('Name must be a string')
+		.notEmpty()
+		.withMessage('Name cannot be empty')
+		.isLength({ min: 2 })
+		.withMessage('Name must be at least 2 characters'),
+	body('genre')
+		.isString()
+		.withMessage('Genre must be a string')
+		.notEmpty()
+		.withMessage('Genre cannot be empty')
+		.isLength({ min: 2 })
+		.withMessage('Genre must be at least 2 characters'),
+	checkValidations
+];
+
 module.exports = {
 	checkValidations,
-	createUserValidators
+	createUserValidators,
+	createGameValidators
 };
