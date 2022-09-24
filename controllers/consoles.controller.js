@@ -10,10 +10,10 @@ const { Game } = require('../models/games.model');
 const { catchAsync } = require('../utils/catchAsync.util');
 
 const createConsole = catchAsync(async (req, res, next) => {
-    const { title, company } = req.body;
+    const { name, company } = req.body;
 
 	const newConsole = await Console.create({
-        title, company
+        name, company
 	});
 
 	// 201 -> Success and a resource has been created
@@ -25,6 +25,7 @@ const createConsole = catchAsync(async (req, res, next) => {
 
 const getAllConsoles = catchAsync(async (req, res, next) => {
     const consoles = await Console.findAll({
+		where: { status: 'active' },
         include: { model: Game }
 	});
 
@@ -35,10 +36,10 @@ const getAllConsoles = catchAsync(async (req, res, next) => {
 });
 
 const changeTitle = catchAsync(async (req, res, next) => {
-    const { title } = req.body;
+    const { name } = req.body;
 	const { console } = req;
 
-	await console.update({ title });
+	await console.update({ name });
 
 	res.status(200).json({
 		status: 'success',

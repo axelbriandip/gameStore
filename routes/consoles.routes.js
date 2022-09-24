@@ -16,7 +16,7 @@ const { consoleExists } = require('../middlewares/consoles.middleware');
 
 const {
 	protectSession,
-	protectUsersAccount,
+    protectUsersAccount,
 	protectAdmin,
 } = require('../middlewares/auth.middleware');
 
@@ -30,7 +30,7 @@ consolesRouter.get('/', getAllConsoles);
 consolesRouter.use(protectSession);
 
 consolesRouter.post('/', createConsole);
-consolesRouter.patch('/:id', consoleExists, protectUsersAccount, changeTitle);
-consolesRouter.delete('/:id', consoleExists, protectUsersAccount, disabledConsole);
+consolesRouter.patch('/:id', consoleExists, changeTitle);
+consolesRouter.delete('/:id', consoleExists, disabledConsole);
 
 module.exports = { consolesRouter };

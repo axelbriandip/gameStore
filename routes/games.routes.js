@@ -17,8 +17,8 @@ const { gameExists } = require('../middlewares/games.middleware');
 
 const {
 	protectSession,
-	protectUsersAccount,
-	protectAdmin,
+    protectUsersAccount,
+	protectAdmin
 } = require('../middlewares/auth.middleware');
 
 const {
