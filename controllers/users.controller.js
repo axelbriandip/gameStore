@@ -13,7 +13,6 @@ const { User } = require('../models/users.model');
 const { catchAsync } = require('../utils/catchAsync.util');
 const { AppError } = require('../utils/appError.util');
 
-// done
 const createUser = catchAsync(async (req, res, next) => {
 	const { name, email, password } = req.body;
 
@@ -67,15 +66,36 @@ const login = catchAsync(async (req, res, next) => {
 });
 
 const updateProfile = catchAsync(async (req, res, next) => {
-    // block code
+    const { name, email } = req.body;
+	const { user } = req;
+
+	await user.update({ name, email });
+
+	res.status(200).json({
+		status: 'success',
+		data: { user },
+	});
 });
 
 const disabledUser = catchAsync(async (req, res, next) => {
-    // block code
+    const { user } = req;
+
+	// Soft delete
+	await user.update({ status: 'disabled' });
+
+	res.status(204).json({ status: 'success' });
 });
 
 const getUsersActives = catchAsync(async (req, res, next) => {
-    // block code
+	const users = await User.findAll({
+		attributes: { exclude: ['password'] },
+		where: { status: 'active' }
+	});
+
+	res.status(200).json({
+		status: 'success',
+		data: { users },
+	});
 });
 
 module.exports = {

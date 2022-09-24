@@ -31,8 +31,8 @@ usersRouter.post('/login', login)
 // Protecting endpoints
 usersRouter.use(protectSession);
 
-usersRouter.patch('/:id', updateProfile);
-usersRouter.delete('/:id', disabledUser);
+usersRouter.patch('/:id', userExists, protectUsersAccount, updateProfile);
+usersRouter.delete('/:id', userExists, protectUsersAccount, disabledUser);
 usersRouter.get('/', getUsersActives);
 
 module.exports = { usersRouter };
