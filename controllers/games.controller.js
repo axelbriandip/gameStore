@@ -13,7 +13,7 @@ const { catchAsync } = require('../utils/catchAsync.util');
 const createGame = catchAsync(async (req, res, next) => {
 	const { title, genre } = req.body;
 
-	const newGame = await User.create({
+	const newGame = await Game.create({
         title, genre
 	});
 
@@ -26,6 +26,7 @@ const createGame = catchAsync(async (req, res, next) => {
 
 const getAllGames = catchAsync(async (req, res, next) => {
     const games = await Game.findAll({
+		where: { status: 'active' },
         include: [
             { model: Console },
             { model: Review }
