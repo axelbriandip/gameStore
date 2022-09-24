@@ -5,14 +5,14 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
 // import utils
-// const { initModels } = require('./models/initModels');
+const { initModels } = require('./models/initModels');
 const { db } = require('./utils/db.util');
 
 const startServer = async () => {
     try {
         await db.authenticate()
 
-        // initModels();
+        initModels();
 
         await db.sync();
 

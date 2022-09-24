@@ -22,7 +22,7 @@ const createGame = catchAsync(async (req, res, next) => {
 		status: 'success',
 		data: { newGame },
 	});
-});
+}); 
 
 const getAllGames = catchAsync(async (req, res, next) => {
     const games = await Game.findAll({
